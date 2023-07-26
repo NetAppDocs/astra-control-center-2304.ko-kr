@@ -1,0 +1,205 @@
+---
+sidebar: sidebar 
+permalink: release-notes/known-issues.html 
+keywords: astra, control center, bugs, known issues, problems 
+summary: 알려진 문제점은 이 제품 릴리스를 성공적으로 사용하지 못하게 만들 수 있는 문제를 식별합니다. 
+---
+= 알려진 문제
+:hardbreaks:
+:allow-uri-read: 
+:source-highlighter: highlight.js
+:icons: font
+:imagesdir: ../media/release-notes/
+
+
+[role="lead"]
+알려진 문제점은 이 제품 릴리스를 성공적으로 사용하지 못하게 만들 수 있는 문제를 식별합니다.
+
+현재 릴리즈에는 다음과 같은 알려진 문제가 영향을 줍니다.
+
+.인프라
+* <<앱 복원으로 인해 PV 크기가 원래 PV보다 큽니다>>
+* <<특정 버전의 PostgreSQL을 사용하여 앱 클론이 실패합니다>>
+* <<서비스 계정 수준 OCP SCC(Security Context Constraints)를 사용할 때 앱 클론이 실패함>>
+* <<애플리케이션 클론을 세트 스토리지 클래스로 구축한 후에는 애플리케이션 클론이 실패합니다>>
+* <<클러스터를 관리하고 볼륨을 추가한 경우 앱 백업 및 스냅숏이 실패합니다>>
+
+
+.클러스터
+* <<기본 kubecononfig 파일에 컨텍스트가 두 개 이상 포함되어 있으면 Astra Control Center를 사용하여 클러스터를 관리할 수 없습니다>>
+* <<Astra Control Center 23.04로 업그레이드한 후 일부 포드가 시작되지 않습니다>>
+* <<일부 포드는 23.04에서 23.04.2로 업그레이드하는 제거 단계 후에 오류 상태를 표시합니다>>
+* <<Istio 환경에서는 모니터링 포드가 충돌할 수 있습니다>>
+
+
+.기타 문제
+* <<프록시를 통해 연결할 때 NetApp Cloud Insights에 관리 클러스터가 나타나지 않습니다>>
+* <<Astra Trident가 오프라인일 때 내부 서비스 오류(500)와 함께 앱 데이터 관리 작업이 실패했습니다>>
+
+
+
+
+== 앱 복원으로 인해 PV 크기가 원래 PV보다 큽니다
+
+백업을 생성한 후 영구 볼륨의 크기를 조정한 다음 해당 백업에서 복원하는 경우 영구 볼륨 크기는 백업 크기를 사용하는 대신 PV의 새 크기와 일치합니다.
+
+
+
+== 특정 버전의 PostgreSQL을 사용하여 앱 클론이 실패합니다
+
+동일한 클러스터 내의 앱 클론은 Bitnami PostgreSQL 11.5.0 차트와 함께 일관되게 실패합니다. 클론을 성공적으로 생성하려면 이전 또는 이후 버전의 차트를 사용하십시오.
+
+
+
+== 서비스 계정 수준 OCP SCC(Security Context Constraints)를 사용할 때 앱 클론이 실패함
+
+원본 보안 컨텍스트 제약 조건이 OpenShift Container Platform 클러스터의 네임스페이스 내에서 서비스 계정 수준에서 구성된 경우 애플리케이션 클론이 실패할 수 있습니다. 애플리케이션 클론이 실패하면 Astra Control Center의 Managed Applications 영역에 상태가 표시됩니다 `Removed`. 를 참조하십시오 https://kb.netapp.com/Cloud/Astra/Control/Application_clone_is_failing_for_an_application_in_Astra_Control_Center["기술 자료 문서를 참조하십시오"^] 를 참조하십시오.
+
+
+
+== 클러스터를 관리하고 볼륨을 추가한 경우 앱 백업 및 스냅숏이 실패합니다
+
+와 함께 백업 및 스냅샷이 실패합니다 `UI 500 error` 이 시나리오에서. 이 문제를 해결하려면 앱 목록을 새로 고치십시오.
+
+
+
+== 애플리케이션 클론을 세트 스토리지 클래스로 구축한 후에는 애플리케이션 클론이 실패합니다
+
+스토리지 클래스가 명시적으로 설정된 상태로 응용 프로그램을 배포한 후(예: `helm install ...-set global.storageClass=netapp-cvs-perf-extreme`)을 사용하여 애플리케이션을 복제하려는 이후 시도에는 타겟 클러스터에 원래 지정된 스토리지 클래스가 있어야 합니다.
+명시적으로 설정된 스토리지 클래스를 가진 애플리케이션을 동일한 스토리지 클래스가 없는 클러스터로 클론 복제하면 실패합니다. 이 시나리오에서는 복구 단계가 없습니다.
+
+
+
+== 기본 kubecononfig 파일에 컨텍스트가 두 개 이상 포함되어 있으면 Astra Control Center를 사용하여 클러스터를 관리할 수 없습니다
+
+2개 이상의 클러스터와 컨텍스트를 사용하여 kubeconfig를 사용할 수 없습니다. 를 참조하십시오 link:https://kb.netapp.com/Cloud/Astra/Control/Managing_cluster_with_Astra_Control_Center_may_fail_when_using_default_kubeconfig_file_contains_more_than_one_context["기술 자료 문서를 참조하십시오"^] 를 참조하십시오.
+
+
+
+== Astra Control Center 23.04로 업그레이드한 후 일부 포드가 시작되지 않습니다
+
+Astra Control Center 23.04로 업그레이드한 후 일부 포드가 시작되지 않을 수 있습니다. 이 문제를 해결하려면 다음 단계를 사용하여 영향을 받는 포드를 수동으로 다시 시작하십시오.
+
+. <namespace>를 현재 네임스페이스로 대체하여 영향을 받는 Pod를 찾습니다.
++
+[listing]
+----
+kubectl get pods -n <namespace> | grep au-pod
+----
++
+영향을 받는 Pod의 결과는 다음과 같습니다.
+
++
+[listing]
+----
+pcloud-astra-control-center-au-pod-0 0/1 CreateContainerConfigError 0 13s
+----
+. 영향을 받는 각 포드를 다시 시작하고 <namespace>를 현재 네임스페이스로 대체합니다.
++
+[listing]
+----
+kubectl delete pod pcloud-astra-control-center-au-pod-0 -n <namespace>
+----
+
+
+
+
+== 일부 포드는 23.04에서 23.04.2로 업그레이드하는 제거 단계 후에 오류 상태를 표시합니다
+
+Astra Control Center 23.04.2로 업그레이드한 후 일부 Pod에서 오류가 표시될 수 있습니다
+에 관련된 로그 `task-service-task-purge`:
+
+[listing]
+----
+kubectl get all -n netapp-acc -o wide|grep purge
+
+pod/task-service-task-purge-28282828-ab1cd     0/1     Error       0             48m     10.111.0.111   openshift-clstr-ol-07-zwlj8-worker-jhp2b   <none>           <none>
+----
+이 오류 상태는 정리 단계가 제대로 실행되지 않았음을 의미합니다. 23.04.2로의 전체 업그레이드가 성공했습니다. 다음 명령을 실행하여 작업을 정리하고 오류 상태를 제거합니다.
+
+[listing]
+----
+kubectl delete job task-service-task-purge-[system-generated task ID] -n <netapp-acc or custom namespace>
+----
+
+
+== Istio 환경에서는 모니터링 포드가 충돌할 수 있습니다
+
+Istio 환경에서 Astra Control Center와 Cloud Insights를 페어링하는 경우, 를 참조하십시오 `telegraf-rs` POD가 충돌할 수 있습니다. 이 문제를 해결하려면 다음 단계를 수행하십시오.
+
+. 충돌한 포드 찾기:
++
+[listing]
+----
+kubectl -n netapp-monitoring get pod | grep Error
+----
++
+다음과 유사한 출력이 표시됩니다.
+
++
+[listing]
+----
+NAME READY STATUS RESTARTS AGE
+telegraf-rs-fhhrh 1/2 Error 2 (26s ago) 32s
+----
+. 충돌한 포드를 다시 시작하여 교체합니다 `<pod_name_from_output>` 영향을 받는 POD 이름 사용:
++
+[listing]
+----
+kubectl -n netapp-monitoring delete pod <pod_name_from_output>
+----
++
+다음과 유사한 출력이 표시됩니다.
+
++
+[listing]
+----
+pod "telegraf-rs-fhhrh" deleted
+----
+. 포드가 다시 시작되었으며 오류 상태가 아닌지 확인합니다.
++
+[listing]
+----
+kubectl -n netapp-monitoring get pod
+----
++
+다음과 유사한 출력이 표시됩니다.
+
++
+[listing]
+----
+NAME READY STATUS RESTARTS AGE
+telegraf-rs-rrnsb 2/2 Running 0 11s
+----
+
+
+
+
+== 프록시를 통해 연결할 때 NetApp Cloud Insights에 관리 클러스터가 나타나지 않습니다
+
+Astra Control Center가 프록시를 통해 NetApp Cloud Insights에 연결할 경우 Cloud Insights에 관리 클러스터가 나타나지 않을 수 있습니다. 이 문제를 해결하려면 관리되는 각 클러스터에서 다음 명령을 실행합니다.
+
+[source, console]
+----
+kubectl get cm telegraf-conf -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\    [[outputs.http]]\n    use_system_proxy = true' | kubectl replace -f -
+----
+[source, console]
+----
+kubectl get cm telegraf-conf-rs -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\    [[outputs.http]]\n    use_system_proxy = true' | kubectl replace -f -
+----
+[source, console]
+----
+kubectl get pods -n netapp-monitoring --no-headers=true | grep 'telegraf-ds\|telegraf-rs' | awk '{print $1}' | xargs kubectl delete -n netapp-monitoring pod
+----
+
+
+== Astra Trident가 오프라인일 때 내부 서비스 오류(500)와 함께 앱 데이터 관리 작업이 실패했습니다
+
+앱 클러스터의 Astra Trident가 오프라인 상태가 되고 다시 온라인 상태가 되고 앱 데이터 관리를 시도할 때 500 내부 서비스 오류가 발생하는 경우, 앱 클러스터의 모든 Kubernetes 노드를 다시 시작하여 기능을 복원합니다.
+
+
+
+== 자세한 내용을 확인하십시오
+
+* link:../release-notes/known-limitations.html["알려진 제한 사항"]
+
