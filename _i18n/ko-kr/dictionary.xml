@@ -2681,7 +2681,6 @@ RKE 2 (v1.24.x), Rancher 2.7</block>
   <block id="7c90d436f62a080a98e02874957865e0" category="inline-link-macro">수행할 수 있습니다</block>
   <block id="41bdd90cead20f2dddf0647e2f48fc13" category="list-text">* Cloud Volumes ONTAP 백엔드를 사용하여 퍼블릭 클라우드에 설치 *: 사용 <block ref="cdbba4f6294205e74dc04d0ee99d1d1f" category="inline-link-macro-rx"></block> AWS(Amazon Web Services), GCP(Google Cloud Platform) 또는 Cloud Volumes ONTAP 스토리지 백엔드가 있는 Microsoft Azure에 Astra Control Center를 설치하려면 다음을 수행합니다.</block>
   <block id="201e09e85ad81db8a19ef9f20c05d1a5" category="inline-link">이 비디오</block>
-  <block id="259f3be9b6c8eefb44e844c2b70333dc" category="paragraph">Astra Control Center 설치 프로세스 데모는 를 참조하십시오<block ref="cbbdec23221803dc148346abe5a297c0" category="inline-link-rx"></block>.</block>
   <block id="44e141a783b8346b1ee5c52bcf894d19" category="list-text"><block ref="689b20f2e0a9cb0a12bc48475b3f81ee" category="inline-link-macro-rx"></block>.</block>
   <block id="e13d4a668fc56237f39878bf668e8d7b" category="inline-link-macro">POD 보안 정책 제한 사항 이해</block>
   <block id="80ba5d209a6c02eb82d0a6e75e4355ff" category="list-text">사용자 환경에서 POD 보안 정책을 구성했거나 구성하려는 경우 POD 보안 정책 및 해당 정책이 Astra Control Center 설치에 어떤 영향을 미치는지 숙지하십시오. 을 참조하십시오 <block ref="2a481a17dd103cf67632448be5755ab1" category="inline-link-macro-rx"></block>.</block>
@@ -2959,4 +2958,5 @@ CRD는 클러스터 전체 오브젝트이며 이를 설치하면 클러스터�
   <block id="8acb58cbd50ef1b468a020ee0bd351d3" category="inline-link-macro"><block ref="8acb58cbd50ef1b468a020ee0bd351d3" category="inline-link-rx"></block></block>
   <block id="2352c4e1f4d0024ade0869e00e6243f4" category="paragraph"><block ref="2352c4e1f4d0024ade0869e00e6243f4" category="inline-link-macro-rx"></block></block>
   <block id="caaa72507433239b8d4d80991bbbbf7a" category="sidebar">Astra Control Center 23.04 문서</block>
+  <block id="285c7fb54a928cf8e9ca78a83740ce60" category="paragraph">Astra Control Center 설치 프로세스의 데모는 를 참조하십시오<block ref="d97427b76746d487a682c110ed41c817" category="inline-link-rx"></block>.</block>
 </blocks>
